@@ -45,7 +45,7 @@ class SetupWizard:
         models = {
             "openai": ["gpt-4", "gpt-4-turbo", "gpt-3.5-turbo"],
             "anthropic": ["claude-3-opus", "claude-3-sonnet", "claude-3-haiku"],
-            "gemini": ["gemini-pro", "gemini-pro-vision"]
+            "gemini": ["gemini-1.5-flash", "gemini-1.5-pro"]
         }
 
         provider_models = models.get(provider, [f"{provider}-default"])

@@ -56,6 +56,8 @@ class ToolOrchestrator:
             if not tool_calls:
                 logger.info("No tool calls found, ending loop")
                 assistant_content = self._extract_assistant_content(response)
+                if not assistant_content:
+                    assistant_content = "I'm here to help! Please let me know what you'd like me to do."
                 self.conversation_manager.add_message("assistant", assistant_content)
                 return assistant_content
 
@@ -89,13 +91,23 @@ class ToolOrchestrator:
             )
 
     def _extract_assistant_content(self, response: Any) -> str:
+        logger.debug(f"Extracting content from response type: {type(response)}")
+
         if isinstance(response, dict):
             if "choices" in response and response["choices"]:
                 message = response["choices"][0].get("message", {})
-                return message.get("content", "")
+                content = message.get("content", "")
+                logger.debug(f"Extracted content from dict: {content[:100]}")
+                return content
         elif hasattr(response, "choices") and response.choices:
-            return response.choices[0].message.content or ""
+            content = response.choices[0].message.content or ""
+            logger.debug(f"Extracted content from object: {content[:100]}")
+            return content
+        elif isinstance(response, str):
+            logger.debug(f"Response is already a string: {response[:100]}")
+            return response
 
+        logger.warning(f"Could not extract content from response: {response}")
         return ""
 
     def reset_iteration_count(self) -> None:

@@ -25,10 +25,10 @@ dev = [
 ]
 
 [project.scripts]
-turtle = "turtle.cli.main:app"
+turtle = "turtle_cli.cli:main"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/turtle"]
+packages = ["src/turtle_cli"]
 
 [tool.pytest.ini_options]
 pythonpath = ["src"]

@@ -1,0 +1,5 @@
+{
+  "provider": "gemini",
+  "model": "gemini-2.0-flash",
+  "setup_completed": true
+}
