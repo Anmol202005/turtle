@@ -17,3 +17,5 @@ venv/
 #Test
 htmlcov
 .coverage
+
+.env
